@@ -1,0 +1,174 @@
+Trabajo Práctico N°8 AyDA.
+Alumno: Mosainer Martín
+
+
+Solución:
+
+Para resolver el problema usando disminución por un factor constante,
+veremos cómo la búsqueda binaria divide el array en cada paso y su número de comparaciones 
+en el peor caso, el caso promedio en búsquedas exitosas y búsquedas sin éxito.
+
+Array dado: 
+
+[3,14,27,31,39,42,55,70,74,81,85,93,98], de longitud n=13
+
+
+Máximo número de comparaciones (peor caso) búsqueda binaria:
+En cada paso, búsqueda binaria divide el array a la mitad. 
+En el peor caso, esto implica una serie de divisiones hasta que quede 1 elemento. 
+El número máximo de comparaciones será igual al número de niveles en 
+el árbol de decisión de búsqueda binaria:
+
+
+Número de comparaciones=[logaritmo en base 2(n)] +1
+
+
+Para n=13: [logaritmo en base 2(13)] = [3.7] = 3
+Por lo tanto, el número máximo de comparaciones en el peor caso es 4.
+
+
+
+Número medio de comparaciones En una búsqueda exitosa:
+
+Cada clave del array tiene una probabilidad uniforme de ser buscada.
+El número de comparaciones para encontrar una clave depende de su nivel en el árbol de decisión (niveles comienzan en 1).
+
+Construcción del árbol de decisión:
+
+Nivel 1: Compara con el elemento medio (55).
+
+Nivel 2: Comparaciones con los subarrays 
+
+[3,14,27,31,39,42] y [70,74,81,85,93,98].
+
+Nivel 3: Comparaciones dentro de las mitades de cada subarray.
+
+Número de comparaciones por nivel:
+
+Nivel 1: 1 comparación (55).
+
+Nivel 2: 6 claves en cada subarray, requieren 2 comparaciones.
+
+Nivel 3: Las claves individuales requieren 3 comparaciones.
+
+Para n=13, las comparaciones por clave son:
+
+Comparaciones= 
+3∑i=1​ (i×número de claves en nivel i)
+=(1×1)+(2×6)+(3×6)=1+12+18=31.
+
+
+El promedio de comparaciones para búsqueda exitosa es:
+
+Total de comparaciones / n = 31/13 ≈ 2.38
+
+
+Número promedio de comparaciones 
+En una búsqueda sin éxito:
+
+Las búsquedas ocurren entre los elementos del array o fuera de sus extremos.
+Hay n+1=14 intervalos para una búsqueda sin éxito:
+Antes del primer elemento, entre cada par consecutivo de elementos y después del último elemento.
+
+
+Número de comparaciones por intervalo:
+El número de comparaciones en cada intervalo depende del nivel donde termina la búsqueda. Para un intervalo, es igual al nivel donde se decidiría que no hay coincidencia.
+
+Intervalos en los extremos 
+(x<3 o x>98): requieren el número máximo de comparaciones (4).
+Intervalos internos (([3,14),[14,27),…,[93,98)): dependen del nivel del árbol.  
+
+
+Análisis por niveles:
+Nivel 1 (raíz):
+
+Compara con el medio (55). 
+
+Ninguna búsqueda sin éxito termina aquí.
+
+Nivel 2:
+
+Dos intervalos adyacentes a la división central:
+
+[3,55) → Se subdivide en el subarray izquierdo.
+
+[55,98) → Se subdivide en el subarray derecho.
+Cada uno abarca un nivel más de profundidad.
+
+Distribución de comparaciones por intervalos en una búsqueda sin éxito (continuación)
+Volvamos al análisis y terminemos correctamente el cálculo de las comparaciones en una búsqueda sin éxito.
+
+Intervalos y niveles en el árbol de decisión:
+Nivel 1 (Comparación con 55):
+
+Ninguna búsqueda sin éxito termina aquí, porque el árbol se sigue dividiendo.
+
+Nivel 2 (División del array en dos mitades):
+
+Subarray izquierdo: 
+
+[3,14,27,31,39,42] → Intervalos antes de 3, entre [3,14),[14,27),…,[42,55).
+
+Subarray derecho: 
+
+[70,74,81,85,93,98] → Intervalos [55,70),[70,74),…,[93,98) y después de 98.
+
+
+Nivel 3 (Profundización en cada subarray):
+
+Cada nivel agrega más intervalos más pequeños hasta que los intervalos ya no se pueden subdividir.
+Para n=13, tenemos 14 intervalos (uno antes del primer elemento, 
+uno después del último y 12 entre los elementos).
+
+
+Número de comparaciones por intervalo:
+El número de comparaciones en cada intervalo corresponde al nivel en el árbol de decisión donde se determina que la búsqueda es infructuosa.
+
+Intervalos más externos (x<3 y x>98):
+
+Requieren el máximo número de comparaciones (4).
+Intervalos internos (entre los elementos del array):
+
+Los intervalos cercanos al medio (
+
+[3,55) y [55,98)) requieren menos comparaciones (3).
+Los intervalos más cercanos a los extremos 
+[3,14),[93,98)) requieren menos comparaciones (2).
+
+Cálculo del promedio de comparaciones en búsqueda sin éxito:
+Cada uno de los 14 intervalos tiene la misma probabilidad.
+Contamos las comparaciones requeridas por intervalo y calculamos el promedio.
+
+Comparaciones por intervalo:
+
+2 intervalos externos: 
+
+4 comparaciones cada uno.
+
+6 intervalos en el subarray izquierdo y 
+
+6 en el derecho:
+
+2 intervalos más cercanos al medio (3 comparaciones cada uno).
+
+4 intervalos más pequeños (2 comparaciones cada uno).
+
+Total de comparaciones:
+
+Total=2⋅4+2⋅3+4⋅2+2⋅3+4⋅2=8+6+8+6+8=36
+
+Promedio de comparaciones:
+
+Promedio sin exito = Total de comparaciones/Número de intervalos = 36/14 ≈ 2.57
+
+Entonces los resultados finales serían: 
+Resultados finales:
+
+Máximo número de comparaciones (peor caso):
+4.
+
+Promedio de comparaciones en una búsqueda exitosa:
+≈2.38.
+
+Promedio de comparaciones en una búsqueda sin éxito:
+≈2.57.
